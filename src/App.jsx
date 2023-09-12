@@ -1,14 +1,15 @@
 import { useState } from 'react';
 import './App.css';
+// import AWS from 'aws-sdk'
 
 
-AWS.config.update({
-  accessKeyId: 'DIN_ACCESS_KEY', // IAM>Users>valfri användare > create Access Key 
-  secretAccessKey: 'DIN_SECRET_KEY', // såfort jag hittar den
-  region: 'eu-north-1', 
-});
+// AWS.config.update({
+//   accessKeyId: 'DIN_ACCESS_KEY', // IAM>Users>valfri användare > create Access Key 
+//   secretAccessKey: 'DIN_SECRET_KEY', // såfort jag hittar den
+//   region: 'eu-north-1', 
+// });
 
-const s3 = new AWS.S3();
+// const s3 = new AWS.S3();
 
 
 function App() {
