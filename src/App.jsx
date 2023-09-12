@@ -3,9 +3,9 @@ import './App.css';
 import AWS from 'aws-sdk';
 
 AWS.config.update({
-	accessKeyId: '',
-	secretAccessKey: '',
-	region: '',
+	accessKeyId: 'AKIA4EHRRSVV7VPUYCGX',
+	secretAccessKey: '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',
+	region: 'eu-north-1',
   });
 
 const s3 = new AWS.S3();
