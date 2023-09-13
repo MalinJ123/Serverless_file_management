@@ -1,18 +1,24 @@
 import React, { useState } from 'react';
 import './App.css';
 import AWS from 'aws-sdk';
+import { useEffect } from 'react';
+
 
 AWS.config.update({
-	accessKeyId: '',
-	secretAccessKey: '',
-	region: '',
-  });
+  accessKeyId: '',
+  secretAccessKey: '',
+  region: '',
+});
 
 const s3 = new AWS.S3();
 
 const App = () => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [images, setImages] = useState([]);
+
+  useEffect(() => {
+    getImages()
+  }, []);
 
   const handleFileChange = (event) => {
     setSelectedFile(event.target.files[0]);
@@ -35,11 +41,13 @@ const App = () => {
         console.error('Fel vid uppladdning:', err);
       } else {
         console.log('Bilden laddades upp!:', data.Location);
+
+        setImages((prevImages) => [...prevImages, selectedFile.name])
       }
     });
   };
 
-  const getImages = () => {
+const getImages = () => {
     const params = {
       Bucket: 'fabulous-dolphins-uploads',
     };
@@ -48,7 +56,7 @@ const App = () => {
       if (err) {
         console.error('Fel vid hämtning av bilder:', err);
       } else {
-      
+
         const imageList = data.Contents.map((obj) => obj.Key);
         setImages(imageList);
       }
@@ -57,14 +65,14 @@ const App = () => {
 
   return (
     <>
-      <div className='container'>
-        <h1 className='title'>Ladda upp bröllopsbilder</h1>
-        <input type="file" onChange={handleFileChange} />
-        <button className='btn' onClick={handleUpload}>Ladda upp filer</button>
-
-        <button className='btn' onClick={getImages}>Visa befintliga bilder</button>
-        
-        {/* Visa befintliga bilder */}
+      <section className='container'>
+        <div className="top-div">
+          <h1 className='title'>Ladda upp bröllopsbilder</h1>
+          <div className="input-div">
+            <input type="file" onChange={handleFileChange} />
+          </div>
+          <button className='btn' onClick={() => { handleUpload(); }}>Ladda upp filer</button>
+        </div>
         <div className="image-list">
           {images.map((imageName, index) => (
             <img
@@ -74,10 +82,9 @@ const App = () => {
             />
           ))}
         </div>
-      </div>
+      </section>
     </>
   );
 };
 
-
-export default App;
+export default App; 
