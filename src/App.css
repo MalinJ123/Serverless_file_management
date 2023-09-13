@@ -1,39 +1,55 @@
-body {
-  margin: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-}
-.container{
-  display: flex;
-  flex-direction: column;
-}
-
-.title{
-  display: flex;
-  justify-content: center;
-}
-
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-  font-family: 'Inconsolata', monospace;
-}
-
-.btn{
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-family: inherit;
-  background-color: #debdbd;
-  cursor: pointer;
-  margin: 1em;
-}
-.btn:hover {
-  border-color: #000000;
-  /* scale: 1.2;  */
-}
+body { 
+  margin: 0; 
+  display: flex; 
+  justify-content: center; 
+  align-items: center; 
+  min-width: 320px; 
+  min-height: 100vh; 
+} 
+.container{ 
+  display: flex; 
+  flex-direction: column; 
+  align-items: center; 
+} 
+.title{ 
+  display: flex; 
+  justify-content: center; 
+} 
+.top-div { 
+  display: flex; 
+  flex-direction: column; 
+  align-items: center; 
+} 
+h1 { 
+  font-size: 3.2em; 
+  line-height: 1.1; 
+  font-family: 'Inconsolata', monospace; 
+} 
+.input-div { 
+  width: 10em; 
+  display: flex; 
+} 
+.image-list { 
+  display: flex; 
+  flex-wrap: wrap; 
+  justify-content: center; 
+} 
+img { 
+  margin: 0.3em; 
+  max-width: 30em; 
+  object-fit: contain; 
+} 
+.btn{ 
+  border-radius: 8px; 
+  border: 1px solid transparent; 
+  padding: 0.6em 1.2em; 
+  font-size: 1em; 
+  font-family: inherit; 
+  background-color: #debdbd; 
+  cursor: pointer; 
+  margin: 1em; 
+} 
+.btn:hover { 
+  border-color: #000000; 
+  /* scale: 1.2;  */ 
+} 
