@@ -8,13 +8,14 @@ AWS.config.update({
   accessKeyId: '', 
   secretAccessKey: '', 
   region: '', 
-  }); 
+  });  
 
 const s3 = new AWS.S3();
 
 const App = () => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [images, setImages] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
 
 
   useEffect(() => {
@@ -68,6 +69,13 @@ const getImages = () => {
     });
   };
 
+  const searchImages = () => {
+    if (searchTerm.trim() === '') {
+      return images
+    }
+    return images.filter((imageName) => imageName.includes(searchTerm))
+  }
+
   return (
     <>
       <section className='container'>
@@ -78,8 +86,18 @@ const getImages = () => {
           </div>
           <button className='btn' onClick={() => { handleUpload(); getImages(); }}>Ladda upp filer</button>
         </div>
+        <div className="search-input">
+        <input
+    type="text"
+    value={searchTerm}
+    onChange={(e) => {
+      setSearchTerm(e.target.value);
+       // Logga värdet av searchterm
+    }}
+  />
+        </div>
         <div className="image-list">
-          {images.map((imageName, index) => (
+          {searchImages().map((imageName, index) => (
             <img
               key={index}
               src={`https://fabulous-dolphins-uploads.s3.eu-north-1.amazonaws.com/${imageName}`}
