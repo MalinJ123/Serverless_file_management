@@ -4,19 +4,18 @@ import AWS from 'aws-sdk';
 import { useEffect } from 'react';
 
 
-AWS.config.update({
-	accessKeyId: '',
-	secretAccessKey: '',
-	region: '',
-  });
-
-
+AWS.config.update({ 
+  accessKeyId: '', 
+  secretAccessKey: '', 
+  region: '', 
+  }); 
 
 const s3 = new AWS.S3();
 
 const App = () => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [images, setImages] = useState([]);
+
 
   useEffect(() => {
     getImages()
@@ -32,9 +31,13 @@ const App = () => {
       return;
     }
 
+    const fileType = selectedFile.name.split('.').pop();
+
+    const prefix = fileType || 'övrigt';
+
     const params = {
       Bucket: 'fabulous-dolphins-uploads',
-      Key: selectedFile.name,
+      Key: `${prefix}/${selectedFile.name}`, // Använd prefixet i nyckeln
       Body: selectedFile,
     };
 
@@ -44,7 +47,7 @@ const App = () => {
       } else {
         console.log('Bilden laddades upp!:', data.Location);
 
-        setImages((prevImages) => [...prevImages, selectedFile.name])
+        getImages();
       }
     });
   };
@@ -73,7 +76,7 @@ const getImages = () => {
           <div className="input-div">
             <input type="file" onChange={handleFileChange} />
           </div>
-          <button className='btn' onClick={() => { handleUpload(); }}>Ladda upp filer</button>
+          <button className='btn' onClick={() => { handleUpload(); getImages(); }}>Ladda upp filer</button>
         </div>
         <div className="image-list">
           {images.map((imageName, index) => (
