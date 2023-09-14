@@ -5,10 +5,12 @@ import { useEffect } from 'react';
 
 
 AWS.config.update({
-  accessKeyId: '',
-  secretAccessKey: '',
-  region: '',
-});
+	accessKeyId: '',
+	secretAccessKey: '',
+	region: '',
+  });
+
+
 
 const s3 = new AWS.S3();
 
